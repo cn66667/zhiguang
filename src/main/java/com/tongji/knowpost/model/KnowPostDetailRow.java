@@ -20,6 +20,7 @@ public class KnowPostDetailRow {
     private String contentSha256;
     private String authorAvatar;
     private String authorNickname;
+    private String authorNicknameDecor;
     private String authorTagJson;
     private Instant publishTime;
     private Boolean isTop;

@@ -158,6 +158,7 @@ public class FeedCacheInvalidationListener {
                             it.tags(),
                             it.authorAvatar(),
                             it.authorNickname(),
+                            it.authorNicknameDecor(),
                             it.tagJson(),
                             like,
                             fav,

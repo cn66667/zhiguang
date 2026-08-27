@@ -10,6 +10,7 @@ import java.time.LocalDate;
 public record AuthUserResponse(
         Long id,
         String nickname,
+        String nicknameDecor,
         String avatar,
         String phone,
         String zhId,

@@ -18,6 +18,7 @@ public class User {
     private String email;
     private String passwordHash;
     private String nickname;
+    private String nicknameDecor;
     private String avatar;
     private String bio;
     private String zgId;

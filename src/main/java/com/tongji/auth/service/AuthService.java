@@ -117,6 +117,7 @@ public class AuthService {
                 .phone(request.identifierType() == IdentifierType.PHONE ? identifier : null)
                 .email(request.identifierType() == IdentifierType.EMAIL ? identifier : null)
                 .nickname(generateNickname())
+                .nicknameDecor("none")
                 .avatar("https://static.zhiguang.cn/default-avatar.png")
                 .bio(null)
                 .tagsJson("[]")
@@ -393,6 +394,7 @@ public class AuthService {
         return new AuthUserResponse(
                 user.getId(),
                 user.getNickname(),
+                user.getNicknameDecor(),
                 user.getAvatar(),
                 user.getPhone(),
                 user.getZgId(),

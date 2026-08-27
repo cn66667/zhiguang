@@ -16,6 +16,7 @@ public enum ErrorCode {
     PASSWORD_POLICY_VIOLATION("PASSWORD_POLICY_VIOLATION", "密码强度不足"),
     TERMS_NOT_ACCEPTED("TERMS_NOT_ACCEPTED", "请先同意服务条款"),
     REFRESH_TOKEN_INVALID("REFRESH_TOKEN_INVALID", "刷新令牌无效"),
+    UNAUTHORIZED("UNAUTHORIZED", "该功能只面向登录用户，登录后即可免费使用"),
     BAD_REQUEST("BAD_REQUEST", "请求参数错误"),
     INTERNAL_ERROR("INTERNAL_ERROR", "服务器内部错误");
 

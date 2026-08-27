@@ -91,6 +91,7 @@ public class SearchIndexService {
             doc.put("author_id", row.getCreatorId());
             doc.put("author_avatar", row.getAuthorAvatar());
             doc.put("author_nickname", row.getAuthorNickname());
+            doc.put("author_nickname_decor", row.getAuthorNicknameDecor());
             doc.put("author_tag_json", row.getAuthorTagJson());
             if (row.getPublishTime() != null) {
                 doc.put("publish_time", row.getPublishTime().toEpochMilli());

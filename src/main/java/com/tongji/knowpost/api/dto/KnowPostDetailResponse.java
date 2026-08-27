@@ -16,6 +16,7 @@ public record KnowPostDetailResponse(
         String authorId,
         String authorAvatar,
         String authorNickname,
+        String authorNicknameDecor,
         String authorTagJson,
         Long likeCount,
         Long favoriteCount,

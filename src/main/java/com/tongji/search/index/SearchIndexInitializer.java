@@ -41,6 +41,7 @@ public class SearchIndexInitializer {
                     .properties("author_id", Property.of(p -> p.long_(LongNumberProperty.of(b -> b))))
                     .properties("author_avatar", Property.of(p -> p.keyword(KeywordProperty.of(b -> b))))
                     .properties("author_nickname", Property.of(p -> p.keyword(KeywordProperty.of(b -> b))))
+                    .properties("author_nickname_decor", Property.of(p -> p.keyword(KeywordProperty.of(b -> b))))
                     .properties("author_tag_json", Property.of(p -> p.keyword(KeywordProperty.of(b -> b))))
                     .properties("publish_time", Property.of(p -> p.date(DateProperty.of(b -> b))))
                     .properties("like_count", Property.of(p -> p.integer(IntegerNumberProperty.of(b -> b))))

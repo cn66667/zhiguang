@@ -13,6 +13,7 @@ public record FeedItemResponse(
         List<String> tags,
         String authorAvatar,
         String authorNickname,
+        String authorNicknameDecor,
         String tagJson,
         Long likeCount,
         Long favoriteCount,
