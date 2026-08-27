@@ -6,9 +6,7 @@ import co.elastic.clients.elasticsearch._types.SortOptions;
 import co.elastic.clients.elasticsearch._types.SortOrder;
 import co.elastic.clients.elasticsearch._types.query_dsl.FieldValueFactorModifier;
 import co.elastic.clients.elasticsearch._types.query_dsl.FunctionBoostMode;
-import co.elastic.clients.elasticsearch.core.search.HighlightField;
 import co.elastic.clients.elasticsearch.core.search.Suggestion;
-import co.elastic.clients.util.NamedValue;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.tongji.knowpost.api.dto.FeedItemResponse;
 import com.tongji.counter.service.CounterService;
@@ -89,8 +87,8 @@ public class SearchServiceImpl implements SearchService {
                         ))
                         // 返回 title/body 高亮片段，后续合并为 snippet
                         .highlight(h -> h
-                                .fields(new NamedValue<>("title", new HighlightField.Builder().build()))
-                                .fields(new NamedValue<>("body", new HighlightField.Builder().build()))
+                                .fields("title", hf -> hf)
+                                .fields("body", hf -> hf)
                         )
                         .sort(sorts);
                 // 游标分页：携带上一次最后命中的 sort 值
@@ -122,6 +120,7 @@ public class SearchServiceImpl implements SearchService {
             String cover = imgs.isEmpty() ? null : imgs.getFirst();
             String authorAvatar = asString(source.get("author_avatar"));
             String authorNickname = asString(source.get("author_nickname"));
+            String authorNicknameDecor = asString(source.get("author_nickname_decor"));
             String tagJson = asString(source.get("author_tag_json"));
             Long likeCount = asLong(source.get("like_count"));
             Long favoriteCount = asLong(source.get("favorite_count"));
@@ -135,6 +134,7 @@ public class SearchServiceImpl implements SearchService {
                     tagList,
                     authorAvatar,
                     authorNickname,
+                    authorNicknameDecor,
                     tagJson,
                     likeCount,
                     favoriteCount,

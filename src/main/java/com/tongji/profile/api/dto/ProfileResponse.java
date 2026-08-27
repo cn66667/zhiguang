@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public record ProfileResponse(
         Long id,
         String nickname,
+        String nicknameDecor,
         String avatar,
         String bio,
         String zgId,

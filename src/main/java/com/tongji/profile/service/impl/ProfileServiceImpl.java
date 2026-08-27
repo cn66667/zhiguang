@@ -73,7 +73,7 @@ public class ProfileServiceImpl implements ProfileService {
         }
 
         // 至少要提交一个字段，否则属于无效请求
-        boolean hasAnyField = req.nickname() != null || req.bio() != null || req.gender() != null
+        boolean hasAnyField = req.nickname() != null || req.nicknameDecor() != null || req.bio() != null || req.gender() != null
                 || req.birthday() != null || req.zgId() != null || req.school() != null
                 || req.tagJson() != null;
 
@@ -111,6 +111,9 @@ public class ProfileServiceImpl implements ProfileService {
         patch.setId(current.getId());
         if (req.nickname() != null) {
             patch.setNickname(req.nickname().trim());
+        }
+        if (req.nicknameDecor() != null) {
+            patch.setNicknameDecor(req.nicknameDecor().trim());
         }
         if (req.bio() != null) {
             patch.setBio(req.bio().trim());
@@ -169,6 +172,7 @@ public class ProfileServiceImpl implements ProfileService {
         return new ProfileResponse(
                 user.getId(),
                 user.getNickname(),
+                user.getNicknameDecor(),
                 user.getAvatar(),
                 user.getBio(),
                 user.getZgId(),

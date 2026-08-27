@@ -1,11 +1,10 @@
-
 spring:
   application:
     name: zhiguang-auth
   datasource:
     url: jdbc:mysql://localhost:3306/zhiguang?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    username: root
-    password: 写你自己的
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       maximum-pool-size: 20             # 连接池最大连接数
@@ -45,7 +44,7 @@ spring:
       ack-mode: manual
   ai:
     deepseek:
-      api-key: 写你自己的
+      api-key: ${DS_PASSWORD}
       base-url: https://api.deepseek.com
       chat:
         options:
@@ -53,7 +52,7 @@ spring:
           temperature: 0.8
     openai:
       base-url: https://dashscope.aliyuncs.com/compatible-mode
-      api-key: 写你自己的
+      api-key: ${AI_PASSWORD}
       embedding:
         options:
           model: text-embedding-v4 # 向量模型
@@ -115,15 +114,15 @@ auth:
 
 logging:
   level:
-    root: INFO
+    root: WARN
     '[com.tongji]': DEBUG
 
 oss:
-  endpoint: oss-cn-beijing.aliyuncs.com
-  access-key-id: 写你自己的
-  access-key-secret: 写你自己的
-  bucket: 写你自己的
-  public-domain: ${OSS_PUBLIC_DOMAIN:}
+  endpoint: oss-cn-hangzhou.aliyuncs.com
+  access-key-id: ${OSS_ID}
+  access-key-secret: ${OSS_SECRET}
+  bucket: know-plantform
+  public-domain:
   folder: avatars
 
 cache:

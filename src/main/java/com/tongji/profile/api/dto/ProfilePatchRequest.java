@@ -12,6 +12,7 @@ import java.time.LocalDate;
  */
 public record ProfilePatchRequest(
         @Size(min = 1, max = 64, message = "昵称长度需在 1-64 之间") String nickname,
+        @Pattern(regexp = "none|rainbow|gold|red", message = "昵称装饰取值为 none/rainbow/gold/red") String nicknameDecor,
         @Size(max = 512, message = "个人描述长度不能超过 512") String bio,
         //(?i)-忽略大小写
         @Pattern(regexp = "(?i)MALE|FEMALE|OTHER|UNKNOWN", message = "性别取值为 MALE/FEMALE/OTHER/UNKNOWN") String gender,

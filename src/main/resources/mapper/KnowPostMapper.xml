@@ -102,6 +102,7 @@
             p.img_urls AS imgUrls,
             u.avatar AS authorAvatar,
             u.nickname AS authorNickname,
+            u.nickname_decor AS authorNicknameDecor,
             u.tags_json AS authorTagJson,
             p.publish_time AS publishTime,
             p.is_top AS isTop
@@ -122,6 +123,7 @@
             p.img_urls AS imgUrls,
             u.avatar AS authorAvatar,
             u.nickname AS authorNickname,
+            u.nickname_decor AS authorNicknameDecor,
             u.tags_json AS authorTagJson,
             p.publish_time AS publishTime,
             p.is_top AS isTop
@@ -146,6 +148,7 @@
             p.content_sha256 AS contentSha256,
             u.avatar AS authorAvatar,
             u.nickname AS authorNickname,
+            u.nickname_decor AS authorNicknameDecor,
             u.tags_json AS authorTagJson,
             p.publish_time AS publishTime,
             p.is_top AS isTop,

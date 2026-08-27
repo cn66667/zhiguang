@@ -16,6 +16,7 @@ public class KnowPostFeedRow {
     private String imgUrls;    // JSON 字符串
     private String authorAvatar;
     private String authorNickname;
+    private String authorNicknameDecor;
     private String authorTagJson; // 作者的领域标签 JSON
     private Instant publishTime;
     private Boolean isTop;

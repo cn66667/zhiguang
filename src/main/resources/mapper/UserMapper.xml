@@ -10,6 +10,7 @@
         <result column="email" property="email"/>
         <result column="password_hash" property="passwordHash"/>
         <result column="nickname" property="nickname"/>
+        <result column="nickname_decor" property="nicknameDecor"/>
         <result column="avatar" property="avatar"/>
         <result column="bio" property="bio"/>
         <result column="zg_id" property="zgId"/>
@@ -58,6 +59,7 @@
             email,
             password_hash,
             nickname,
+            nickname_decor,
             avatar,
             bio,
             zg_id,
@@ -72,6 +74,7 @@
             #{email},
             #{passwordHash},
             #{nickname},
+            #{nicknameDecor},
             #{avatar},
             #{bio},
             #{zgId},
@@ -101,6 +104,7 @@
         UPDATE users
         <set>
             <if test="nickname != null">nickname = #{nickname},</if>
+            <if test="nicknameDecor != null">nickname_decor = #{nicknameDecor},</if>
             <if test="bio != null">bio = #{bio},</if>
             <if test="gender != null">gender = #{gender},</if>
             <if test="birthday != null">birthday = #{birthday},</if>
