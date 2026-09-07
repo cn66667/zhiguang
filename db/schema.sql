@@ -109,3 +109,25 @@ CREATE TABLE IF NOT EXISTS follower (
     KEY idx_to_created (to_user_id, created_at, from_user_id, rel_status),
     KEY idx_from (from_user_id, to_user_id, rel_status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 站内通知表（点赞/收藏等正向行为触达作者）
+-- 说明：
+-- - event_id 为 Kafka 事件全局唯一 ID（生产者生成），用于消费幂等去重；
+-- - recipient_id 由消费者异步解析（knowpost → creator_id），事件本身不携带；
+-- - content 为文案快照，避免前端展示时反查；
+-- - 未读红点计数走 Redis（notif:unread:{userId}），is_read 仅作列表已读标记。
+CREATE TABLE IF NOT EXISTS notification (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    event_id VARCHAR(64) NOT NULL,
+    recipient_id BIGINT UNSIGNED NOT NULL COMMENT '接收者（内容作者）',
+    actor_id BIGINT UNSIGNED NOT NULL COMMENT '触发者（点赞/收藏的人）',
+    action_type VARCHAR(32) NOT NULL COMMENT 'like / fav',
+    entity_type VARCHAR(32) NOT NULL COMMENT 'knowpost',
+    entity_id BIGINT UNSIGNED NOT NULL,
+    content VARCHAR(512) NULL COMMENT '文案快照',
+    is_read TINYINT(1) NOT NULL DEFAULT 0,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_notification_event (event_id),
+    KEY ix_notification_recipient (recipient_id, is_read, id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

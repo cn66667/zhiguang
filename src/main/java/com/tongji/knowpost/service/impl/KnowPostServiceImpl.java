@@ -402,7 +402,13 @@ public class KnowPostServiceImpl implements KnowPostService {
             // 解析图片和标签 JSON
             List<String> images = parseStringArray(row.getImgUrls());
             List<String> tags = parseStringArray(row.getTags());
-            
+
+            // contentUrl 以 object_key 为准重建，自愈历史遗留的旧格式/失效 URL
+            String resolvedContentUrl = row.getContentUrl();
+            if (row.getContentObjectKey() != null && !row.getContentObjectKey().isBlank()) {
+                resolvedContentUrl = publicUrl(row.getContentObjectKey());
+            }
+
             // 此处查询的计数仅作为缓存的基础值，后续 enrich 会刷新
             Map<String, Long> counts = counterService.getCounts("knowpost", String.valueOf(row.getId()), List.of("like", "fav"));
             Long likeCount = counts.getOrDefault("like", 0L);
@@ -412,7 +418,7 @@ public class KnowPostServiceImpl implements KnowPostService {
                     String.valueOf(row.getId()),
                     row.getTitle(),
                     row.getDescription(),
-                    row.getContentUrl(),
+                    resolvedContentUrl,
                     images,
                     tags,
                     String.valueOf(row.getCreatorId()),
