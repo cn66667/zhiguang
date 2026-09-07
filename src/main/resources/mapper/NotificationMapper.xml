@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tongji.notification.mapper.NotificationMapper">
+    <insert id="insert">
+        INSERT INTO notification
+            (event_id, recipient_id, actor_id, action_type, entity_type, entity_id, content)
+        VALUES
+            (#{eventId}, #{recipientId}, #{actorId}, #{actionType}, #{entityType}, #{entityId}, #{content})
+    </insert>
+
+    <select id="listByRecipient" resultType="map">
+        SELECT n.id              AS id,
+               n.actor_id        AS actorId,
+               u.nickname        AS actorNickname,
+               u.avatar          AS actorAvatar,
+               n.action_type     AS actionType,
+               n.entity_type     AS entityType,
+                CAST(n.entity_id AS CHAR) AS entityId,
+               n.content         AS content,
+               n.is_read         AS isRead,
+               n.created_at      AS createdAt
+        FROM notification n
+        LEFT JOIN users u ON u.id = n.actor_id
+        WHERE n.recipient_id = #{recipientId}
+        ORDER BY n.id DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countByRecipient" resultType="long">
+        SELECT COUNT(1) FROM notification WHERE recipient_id = #{recipientId} AND is_read = 0
+    </select>
+
+    <update id="markAllRead">
+        UPDATE notification SET is_read = 1 WHERE recipient_id = #{recipientId} AND is_read = 0
+    </update>
+
+    <update id="markOneRead">
+       UPDATE notification SET is_read = 1 where recipient_id = #{recipientId} AND entity_type=#{entityType} AND is_read=0 AND entity_id=#{entityId}
+    </update>
+</mapper>

@@ -60,6 +60,9 @@ public class SecurityConfig {
                         .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/knowposts/detail/*").permitAll()
                         // 知文详情页 RAG 问答（SSE 流式输出）需要登录：未登录返回 401，由前端跳转登录页并提示
                         .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/knowposts/*/qa/stream").authenticated()
+                        // 通知 SSE 流：EventSource 无法带 Authorization 头，token 走查询参数，
+                        // 由 NotificationController 内部手动校验（仅接受 access token）
+                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/notification/stream").permitAll()
                         .requestMatchers(
                                 "/api/v1/auth/send-code",
                                 "/api/v1/auth/register",
